@@ -17,6 +17,8 @@ Use this for LPs, campaign graphics, and presentation decks. Build reusable asse
 
 A slide deck does not need web component contracts. An interactive LP also uses the UI path's component/browser checks.
 
+Use [agent-integration.md](agent-integration.md) for task Skills and retrieval: expose the brief, approved assets, brand rules, narrative, patterns, and rubric instead of inventing UI components for a deck or graphic. Provide creation/review/improvement workflows with the native authoring and export commands. A catalog can point to local native assets; never claim the starter's HTML checker can inspect a slide deck.
+
 ## Brief example
 
 ```markdown
@@ -85,3 +87,5 @@ Attach examples and reasons to relevant criteria. Do not average away incorrect 
 If differentiation is required, write the core message with competitor names substituted and discuss what brand-specific meaning remains. This is a critique exercise, not a deterministic originality test. Familiar navigation, instructions, and accessibility patterns do not need a novelty gate.
 
 When spacing adjustments fail, inspect relationships: what should appear first, what supports it, and what the reader expects. Record “in this context, we selected this arrangement because…” instead of a global whitespace rule. This preserves useful judgment without overgeneralizing it.
+
+Feed that record through [evolution.md](evolution.md). Propose the relevant pattern, rubric, or brand-reference change, retain the responsible decision, refresh its retrieval path, and verify a second artifact reads the adopted guidance. A campaign-specific selection must retain its audience/medium scope; rejected alternatives remain maintainer context, not instructions for the next campaign.

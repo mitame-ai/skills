@@ -74,6 +74,8 @@ For ordinary delivery, run checks proportionate to the task. A benchmark program
 
 Keep the agent entrypoint small enough to orient the task: authority, retrieval paths, workflow, and commands. Put detailed component guidance near the component and task-specific context with the task. This makes relevant knowledge easier to find without injecting every rule into every session.
 
+Make this executable: a catalog identifies authoritative records, a resolver selects task dependencies, MCP exposes retrieval/checking, and Agent Skills organize the work. Human reference views and machine responses should derive from the same maintained records. These are access paths, not separate owners of the design system. [agent-integration.md](agent-integration.md) supplies the build procedure.
+
 When behavior across multiple screens matters, use a working prototype with consistent data and reproducible states. Static examples remain useful for appearance and hierarchy, but cannot demonstrate transitions or recovery.
 
 For several products with genuinely different requirements, separate shared constraints, design-system knowledge, and product/task context. Reuse the production and verification mechanisms while preserving those differences. A single project does not need a distribution or synchronization platform just to mirror this organization.
@@ -83,5 +85,7 @@ For several products with genuinely different requirements, separate shared cons
 Capture observations, adopted or rejected changes, reasons, and evidence in the team's normal workflow. Then decide what generalizes. Route each lesson to the smallest useful home: task decision, component guidance, composition pattern, or shared rule. Repeated mechanical failures are candidates for executable checks; one person's local preference is not automatically organizational policy.
 
 Give maintained knowledge an owner and revalidation triggers, such as changes to tokens/components, product or brand requirements, recurring failures, or the agent/toolchain. Retire outdated or contradictory guidance instead of endlessly appending it. Logging and curation are separate activities; log collection alone does not establish improvement.
+
+Separate proposals from authority, record acceptance or rejection with reasons, and verify that adopted knowledge is retrieved in a later task. Correcting today's output and changing tomorrow's guidance are different observable outcomes. The [evolution workflow](evolution.md) connects them without treating every observation as policy or every repeated task as an autonomous agent loop.
 
 When rolling out to a team, make the first workflow easy to invoke, its output easy to inspect, and its feedback easy to submit. Prove one complete task with the tools people already use, then expand based on observed needs. Adoption, ownership, and maintenance are part of the harness because they determine whether the next task benefits from what was learned.

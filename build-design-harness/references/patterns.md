@@ -30,7 +30,9 @@ Source and script filenames follow the project's language and framework. The tre
 tokens -> generated theme -> component implementation -> composed page
 component contract + pattern + scenario -> implementation instructions
 rules -> executable assertions -> report + rendered evidence
-report -> correction -> rerun -> decision/contract/check update
+scenario -> catalog/resolver -> relevant contracts + task Skills -> implementation
+authority -> MCP resources + generated reference catalog + theme
+report -> correction -> proposal -> decision -> authority update -> next task
 ```
 
 Writing JSON does not make the application consume it. The generator consumes tokens; the build imports generated CSS; the implementation uses real component APIs; tests map rule/scenario IDs to assertions against the implementation. Document those connections.
@@ -208,7 +210,38 @@ Implement the named tests; the `test` strings are identifiers, not existing comm
 3. Document and render the real shared components needed by the task.
 4. Compose a runnable page; wire the scenario's state transitions.
 5. Implement source/contract checks and browser assertions; aggregate real results.
-6. Run the workflow, correct a defect, and retain before/after evidence.
-7. Record the adopted lesson, scope, and owner.
+6. Expose the same authority/checks through the [agent integration](agent-integration.md); install the task Skills and test retrieval.
+7. Run the workflow, correct a defect, and retain before/after evidence.
+8. Follow the [learning workflow](evolution.md) and prove a fresh task consumes the adopted lesson.
 
 Connect and verify existing implementations of these steps. Do not expand one flow into a full component catalog, or stop at JSON while the theme, examples, or checks have no consumer.
+
+## Extend for the actual workflow
+
+Apply these additions when the chosen task needs them. Each requires a consumer and a verification case, not just another document.
+
+### Business knowledge, writing, and localization
+
+Create or connect topic references for domain terms, object/status definitions, UX writing, and localization. Record the authoritative term, meaning, permitted transitions, display text by locale, and examples of misuse. Keep business facts in product requirements; Skills explain when and how to read them.
+
+Resolve those references alongside the scenario. A writing Skill should inspect actual labels in context and check that the same object/action uses the same terminology across screens. Implement checks for declared status values and missing translation keys where decidable; review tone and clarity with rendered examples. Do not copy another product's vocabulary or claim a word-length check establishes good writing.
+
+### Several screens and shared state
+
+Extend the scenario with route IDs, related entities, shared fixture data, overlays, and transitions. Assign each route/overlay a composition pattern. Example: a member edited in a detail page must show the updated name in the list; cancel must not mutate it; a failed save must preserve the edit without changing the list.
+
+Use one shared fixture/store rather than independent per-screen mock objects that disagree. Run a cross-screen journey after individual screen checks. Produce a story-ordered capture index with the route/state, reproduction instruction or URL, and screenshot. Keep any URL-driven state switch in the prototype/test boundary; do not add a production authorization or error bypass.
+
+If parallel design/review is explicitly part of the target workflow, give each worker the same requirements and shared data contract, define ownership, and aggregate a cross-screen review. The behavior and handoff can also run in one agent; a fixed agent count is not a requirement.
+
+### Requirements and prototype round trip
+
+Create a task-input template that preserves requirement IDs, user goal, routes, data, states, related features, and open questions. Consume it in the build Skill. It can be populated from an existing requirements document; preserve the authoritative document and its supplied decisions.
+
+When exploration produces an agreement, write a proposed requirements delta referencing the observed prototype state and decision. Adopt that delta into the established requirements source before using it as implementation policy. The handoff includes the selected requirement revision, behavior/state table, unresolved items, and reproduction/capture index. A prototype is evidence of exploration, not automatic approval or production-ready code.
+
+For teams with separate prototype/production repositories, build an explicit refresh procedure: identify the production revision and relevant components, update the prototype baseline in a reviewed change, preserve prototype-only state controls, and rerun the representative journey. If extracting a specification or generating production code is requested, test the resulting implementation against those requirements; do not report a conversion percentage without measurement.
+
+### Shared distribution and maintenance
+
+Use the [installation/update contract](agent-integration.md#install-update-and-remove) when more than one project consumes the harness. Record the consumed version and run a representative consumer before accepting breaking changes. Keep onboarding commands and generated documentation aligned with the actual scripts. A health assessment should report what can be retrieved, executed, and maintained, with evidence and a repair action for each gap; file presence alone is insufficient.

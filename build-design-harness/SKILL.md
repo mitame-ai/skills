@@ -1,11 +1,11 @@
 ---
 name: build-design-harness
-description: "Build a working design harness for AI-assisted UI or communication design: source-of-truth files, tokens, component and composition contracts, task workflows, executable checks, and evidence-backed revision. Use to create or extend this infrastructure, not for an isolated styling change."
+description: "Build a working design harness for AI-assisted UI or communication design: authoritative contracts, MCP access, task-specific Agent Skills, executable checks, and reviewed learning that reaches the next task. Use to create or extend this infrastructure, not for an isolated styling change."
 ---
 
 # Build Design Harness
 
-Create the files, implementation, and checks that let the next agent produce consistent work without reconstructing the design system. Deliver one working path from a brief to a rendered artifact, a check result, and a corrected result.
+Create the files, implementation, and checks that let the next agent produce consistent work without reconstructing the design system. Deliver one working path from a brief through retrieved knowledge, a rendered artifact, a check result, a correction, and a reviewed lesson used in a later task.
 
 Apply the design principles below throughout the build. Read [concepts.md](references/concepts.md) when choosing what to constrain, how to evaluate it, or which lessons to retain; it explains the principles and their conditions of use. The skill contains the knowledge needed to perform the work without external background reading.
 
@@ -33,12 +33,18 @@ For product UI, create or extend these deliverables. The paths are defaults when
 | `design/rules.json` | Rule IDs, scope, requirement, checker or review method, exceptions | Each required mechanical rule maps to an implemented assertion. |
 | Check scripts and task-runner integration | Contract checks, source checks, browser checks, report writing | A deliberate violation produces a nonzero exit; fixing it passes. |
 | `design/decisions.md` and run evidence | Decisions with reasons; artifact revision, observations, results, screenshots | A correction is traced to a rerun and a reusable rule or scoped decision. |
+| Catalog/resolver and MCP server | Searchable resources, task dependency resolution, shared checker, client connection | A real client retrieves the needed contracts and reports the same violations as the CLI. |
+| Project Agent Skills | Build, review, and improve workflows with precise triggers and local references | The target agent discovers the Skill, resolves its inputs, and executes its documented commands. |
+| Generated human/agent views | Catalog, reference index, theme; each tied to an authoritative source | A source change fails a non-mutating drift check until views are regenerated. |
+| Feedback proposals and adoption evidence | Observation, scope, evidence, destination, decision/reason, applied change | Pending/rejected proposals stay out of policy; a later task consumes an accepted update. |
 
 Use [patterns.md](references/patterns.md) for file contents, linked JSON examples, data flow, and implementation order. For LPs, brand graphics, or decks, use [communication.md](references/communication.md) instead of manufacturing UI component contracts for a non-UI task. Both paths use [verification.md](references/verification.md).
 
+Read [agent-integration.md](references/agent-integration.md) to build MCP, task Skills, retrieval, derived views, and installation/update paths. Read [evolution.md](references/evolution.md) to implement capture, review, adoption, and next-task proof. These are capabilities to build or connect; a review-only request does not authorize installing every subsystem.
+
 ## 1. Map the target project
 
-Inspect its instruction files, build scripts, token source, component exports, CSS/theme entrypoint, stories/examples, test runner, and preview. Read actual implementations and trace their callers before defining constraints.
+Inspect its instruction files, existing Skills/MCP, build scripts, token source, component exports, CSS/theme entrypoint, stories/examples, test runner, and preview. Locate requirements, terminology/state definitions, and existing feedback/review ownership. Read actual implementations and trace their callers before defining constraints.
 
 Write an authority map in `DESIGN.md`: which file owns values, behavior, composition, product requirements, and review decisions. Record the pilot task, its user/outcome, required states/media, and exclusions. Select one actual flow or artifact; ask only for missing facts that change it materially.
 
@@ -60,7 +66,13 @@ Verify contracts and sources first, then render the UI or exported medium. Exerc
 
 Make mechanical failures fail the task-runner command and connect it to existing CI when in scope. Unexecuted checks and unresolved contextual judgments remain visible even when the mechanical command succeeds.
 
-## 4. Install the task workflow
+Share the checker between CLI, MCP, and any supported editor/hook entrypoint. Hooks report or block a detected problem; the task workflow owns correction attempts. Include what was checked, what cannot be checked, and why. Test the harness itself: references resolve, declared mechanical rules have implementations, changed contracts reach all generated views, and the checker rejects known violations.
+
+## 4. Expose knowledge and install task Skills
+
+Follow [agent-integration.md](references/agent-integration.md). Build searchable resources and resolve a task into its relevant contracts, component/pattern dependencies, and Skills. Use the same authority and checker as the local commands. Keep proposals outside this retrieval surface.
+
+Install or adapt project Skills for implementation, review, and knowledge improvement. Give each a task-specific description, inputs, local reading path, real commands, output, and stopping conditions. Do not copy token values or component specifications into Skill prose. Reuse the target's supported discovery directories rather than assuming one agent client.
 
 Add a short pointer to `DESIGN.md` in the existing agent entrypoint, preserving unrelated instructions. Put this workflow in `DESIGN.md`, with actual paths and commands:
 
@@ -73,9 +85,17 @@ Add a short pointer to `DESIGN.md` in the existing agent entrypoint, preserving 
 
 Use an existing retry budget; otherwise start with at most two automatic correction attempts. Stop earlier when progress stalls, a required tool is unavailable, or the next change needs a new product decision. Preserve the last verified result. Do not lower the acceptance bar to make a run pass. This is a default for the workflow being built, not a reason to leave the user's authorized implementation unfinished.
 
-## 5. Demonstrate the complete path
+## 5. Connect corrections to the next task
+
+Implement [evolution.md](references/evolution.md): capture a concrete observation during work or wrap-up, propose the smallest knowledge change, record the responsible decision, apply accepted changes, refresh derived views, and verify a fresh task. Existing explicit authorization remains valid; do not invent approval or add repeat confirmation gates. Generalizing a local observation into new shared policy still requires the applicable decision.
+
+Keep rejected proposals and reasons available to maintainers without injecting them as instructions. For multi-screen tasks, requirements handoff, or shared distribution, implement the relevant extension in [patterns.md](references/patterns.md#extend-for-the-actual-workflow) rather than replacing the team's workflow.
+
+## 6. Demonstrate the complete path
 
 Run the actual entrypoint on the pilot. Show a real violation, its reported rule ID and evidence, the correction, and the rerun. Use an isolated fixture for deliberate breakage. Check a neighboring case so the rule does not merely memorize one screenshot.
+
+For MCP and learning, also show real transport retrieval, CLI/MCP agreement, an ignored pending/rejected proposal, and an accepted lesson consumed by a new run. The [runnable starter](references/agent-integration.md#run-the-bundled-starter) supplies a tested local example, not the target project's full UI or browser verifier. Copy it with [copy-starter.mjs](scripts/copy-starter.mjs); this also reuses the token generator without maintaining another implementation.
 
 Finish when the deliverables in the selected path have real consumers and observable results. If a capability is missing, identify the unverified acceptance condition and complete independent work; do not claim the harness is operational. Respect requests limited to review or planning by producing findings or a build specification instead of editing product code.
 

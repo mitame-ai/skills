@@ -12,6 +12,8 @@ This specifies what executes, how results are represented, and how to prove the 
 
 Inspect authority or implementation, not two copies of the same claim. Use a language-aware linter for code policy; regex scanning is not a reliable component/API validator. Map failures to rule IDs so the correcting agent can retrieve the right contract.
 
+Use the same assertion implementation in CLI, MCP, and any supported editor hook. Keep hook adapters small: supply supported input, return findings, and propagate failures. The task workflow owns retries and escalation. Reusing the core does not establish that a hook is installed; test its actual invocation when hook integration is in scope.
+
 ## Browser assertions for the profile example
 
 Use observed accessible names or established stable test IDs. Connect backend/mock responses through the project's normal test mechanism.
@@ -78,6 +80,8 @@ Illustrative report shape:
 
 Use real observations and files, not this example's results. Evidence paths are relative to the run directory and must describe the current artifact. Include uncommitted changes in the artifact identity; HEAD alone can identify the wrong code. Record viewport/theme, tool versions, and commands in metadata or logs.
 
+Also record the contract revision and coverage: which mechanical rules actually ran, which were inapplicable, and which require another checker or contextual review. Binding a report only to the artifact misses changes in the rules used to evaluate it. Keep original source bytes intact when hashing or transporting them.
+
 - `pass`: the applicable check ran and met its criterion.
 - `fail`: actual evidence violates the criterion.
 - `needs-review`: evidence exists but judgment is unresolved.
@@ -116,4 +120,25 @@ Exception: None for this flow; other flows need their own justification.
 
 Retain rejected suggestions when their reasons prevent repeated unhelpful corrections. Route lessons to the smallest applicable scope: scenario, component, pattern, then shared policy when justified. For preferences, preserve context and alternatives instead of inventing lint rules.
 
+Implement the proposal, decision, adoption, and next-task proof described in [evolution.md](evolution.md). A decision record is an input to that process, not proof that retrieval or checks changed.
+
 To measure improvement, keep baseline, harness-assisted, and corrected runs separate with equivalent task/model/tool/input conditions. Record human intervention. Do not hand-edit a comparison artifact while attributing the change to the harness. Retain the best verified revision when later scoring promotes complexity or a worse direction.
+
+## Verify the harness itself
+
+The [starter tests](../assets/harness-starter/test.mjs) demonstrate these mechanisms. Adapt the cases to the target's actual runtime:
+
+| Mechanism | Required evidence |
+| --- | --- |
+| Retrieval and Skill routing | Resolve a real task, read each returned resource, and execute the discovered Skill's commands; unknown IDs and missing Skills fail |
+| MCP | A subprocess stdio or actual selected transport client lists/reads resources and calls tools; handlers alone do not prove transport |
+| Shared checks | The same artifact/scenario produces the same revision, rule IDs, findings, and coverage through CLI and MCP |
+| Contract integrity | Duplicate IDs, unresolved dependencies, unsupported detector declarations, and missing rule implementations fail |
+| Derived views | Changing authority makes the freshness check fail without rewriting output; regeneration updates the catalog/theme |
+| Learning | Pending/rejected proposals do not change policy; accepted changes are visible in a new retrieval/run and detect the defect |
+| Scope | A lesson for one scenario does not affect an unrelated scenario |
+| Copy/install | A fresh working copy installs its lockfile and runs the documented commands without paths back into the author's checkout |
+
+For a richer rule engine, check both directions between rule declarations and detector registrations; a registered detector without a reachable rule can be dead enforcement. Check that a new contract appears in discovery and its human view, rather than asserting that a particular source file contains its name.
+
+Separate validation claims in the handover: deterministic checks, operator walkthrough, agent behavior, rendered evidence, and human acceptance. Passing the starter's static tests does not prove complete UI conformance or general improvements in generated design quality.

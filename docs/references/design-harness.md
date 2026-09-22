@@ -224,3 +224,97 @@ The research covers official websites, event announcements, social posts, practi
 | [Curate feedback and design for adoption](../../build-design-harness/references/concepts.md#curate-feedback-and-design-for-adoption) | E1-C, E2-A, P3 | Raw logs and unreviewed anecdotes do not become global policy. |
 
 The example rule record, decision record, result vocabulary, and verification menu in the skill are this workspace's synthesis. They are not attributed as a schema or standard defined by any one source. The research supports mechanisms and tradeoffs; it does not establish a single industry standard for “design harness.”
+
+## 2026-09-23 — Implementation gap audit and runnable starter
+
+This follow-up compared the existing skill with the requested public examples, including their implementation files. The previous skill covered constraints, composition, evidence, and feedback principles, but did not make MCP access, downstream Agent Skills, or next-task learning operational. “Partial” below means a concept or example existed without enough implementation wiring; it does not mean the earlier skill omitted the topic entirely.
+
+### Evidence scope
+
+- Melta repository snapshot: `88ff61bc52a6b6224c3837522a447c985e8b5ebb`.
+- Atlas repository snapshot: `a0e0c35288129e0354931195d8baa609b12250fd`.
+- Repository implementation/test files were read, not installed or executed. Website/README claims about test counts, benchmarks, adoption, or production reliability were not independently reproduced.
+- Money Forward and Sansan describe their own internal practices. Their articles establish reported workflows, not independently inspected private implementations. Sansan explicitly reports that effectiveness measurement was still pending.
+- The Atlas public overview and getting-started page were inspected in the rendered browser after the text reader failed. Public site content and repository snapshots are separate evidence; neither is assumed to match the other's publication revision.
+- Melta's loop playbook is governance/design documentation, not proof every listed automation runs. Its distribution document distinguishes the public lint-core subset from the fuller MCP/CLI composition checks and records incomplete capabilities; those limits are retained here.
+- The SDK package metadata and published 2.0.0 type declarations were inspected to implement the new example. The example uses SDK v2 but does not claim its tests prove every client or every supported protocol negotiation mode.
+
+### Gap-to-delivery matrix
+
+| Gap | Before | Evidence | Delivered capability and acceptance |
+| --- | --- | --- | --- |
+| MCP retrieval and checking | Absent | Melta server/check-html; Atlas MCP server | [Agent integration](../../build-design-harness/references/agent-integration.md): real stdio resources/tools, shared CLI checker, unknown-input rejection |
+| Downstream Agent Skills | Entrypoint pointer only | Melta build/review/ban Skills; Atlas Skill; Money Forward P2 | Three [starter Skills](../../build-design-harness/assets/harness-starter/AGENTS.md), task routing, real commands, and read-only review boundaries |
+| Learning that affects later tasks | Feedback principle and decision example | Money Forward P2; Sansan P3; Melta learning quarantine | [Evolution](../../build-design-harness/references/evolution.md): proposal, responsible decision, adoption, fresh retrieval and regression proof |
+| Selective context/dependencies | Reading guidance only | Atlas design-catalog and skill-catalog | Scenario resolver returns required resources/Skills and rejects unresolved references |
+| Shared human/agent views | Token-to-CSS example only | Melta authority; Atlas catalog and docs checks | Generated reference catalog and MCP resources consume the same authority; source-change drift fails |
+| Immediate validation and coverage | CLI/CI principles | Melta checker/hook; Atlas lint mapping | Shared CLI/MCP result, coverage limits, hook adapter guidance without inventing an installed hook |
+| Harness integrity | Basic IDs/check mapping | Atlas extension procedure and mapping tests | Detector/schema/ref/Skill validation, generated-view drift, real consumer and transport tests |
+| Business knowledge and multiple screens | Single-flow example | Money Forward P2; Atlas writing Skill | [Workflow extensions](../../build-design-harness/references/patterns.md#extend-for-the-actual-workflow): terminology, localization, shared state, cross-screen journeys and capture index |
+| Requirements/prototype round trip | Brief-to-artifact direction | Money Forward P2 | Task-input template, requirement delta, state/route handoff, reviewed production-baseline refresh |
+| Installation/update/compatibility | Limited handover guidance | Atlas MCP/setup; Melta distribution | Fresh-copy install test, connection/restart/removal procedure, conditional shared-consumer compatibility checks |
+| Measured improvement | Comparison principle only | Atlas experiments; Sansan's stated uncertainty | [Comparison procedure](../../build-design-harness/references/evolution.md#maintenance-and-comparison): separated runs, controlled inputs, actual measurements, recorded intervention |
+
+The runnable starter deliberately demonstrates local retrieval, required-attribute HTML checks, generated views, and reviewed rule addition. It does not implement a browser verifier, a hosted service, scheduled collection, a package registry, or parallel agent orchestration. The skill describes how to build the other capabilities when the target workflow requires them. Its schemas, sample brand values, rule IDs, and code are original examples, not copied source implementations or proposed universal standards.
+
+### Additional sources and access log
+
+The earlier bibliography remains intact. These URLs were consulted during the follow-up; pinned file links below identify the code inspected, and raw links record the actual retrieval endpoints.
+
+- [Melta showcase](https://melta.tsubotax.com/) and [repository overview](https://github.com/tsubotax/melta-ui).
+- [Atlas demo](https://demo-ds.design-harness.com/), [rendered setup page](https://demo-ds.design-harness.com/getting-started), and [repository overview](https://github.com/lumilinks-hq/atlas-design-system).
+- [Money Forward code-prototype workflow](https://note.com/mfdesign/n/n51eb399cefc0), reread for task Skills, reviewed reference updates, cross-screen review, and requirements/prototype handoff.
+- [Sansan learning logs](https://note.com/sansan_cpo/n/n0df771f4ef2f), reread for capture, curation, scope-specific placement, and the explicit lack of measured effectiveness at publication.
+- [Official MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk), read for the stable v2 package layout and stdio entrypoints.
+- Attempted SDK documentation endpoints [server stdio](https://ts.sdk.modelcontextprotocol.io/v2/server/stdio) and [client stdio](https://ts.sdk.modelcontextprotocol.io/v2/client/stdio) were unavailable to the text reader; published SDK declarations supplied the API details instead.
+
+#### Pinned implementation files
+
+**tsubotax/melta-ui**
+
+- `src/server.ts`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/src/server.ts), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/src/server.ts).
+- `src/tools/check-html.ts`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/src/tools/check-html.ts), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/src/tools/check-html.ts).
+- `src/tools/check-rule.ts`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/src/tools/check-rule.ts), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/src/tools/check-rule.ts).
+- `skills/build-screen/SKILL.md`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/skills/build-screen/SKILL.md), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/skills/build-screen/SKILL.md).
+- `skills/design-review/SKILL.md`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/skills/design-review/SKILL.md), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/skills/design-review/SKILL.md).
+- `skills/ban-pattern/SKILL.md`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/skills/ban-pattern/SKILL.md), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/skills/ban-pattern/SKILL.md).
+- `docs/melta-loop-playbook.md`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/docs/melta-loop-playbook.md), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/docs/melta-loop-playbook.md).
+- `docs/loop-learnings/README.md`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/docs/loop-learnings/README.md), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/docs/loop-learnings/README.md).
+- `design/authority.md`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/design/authority.md), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/design/authority.md).
+- `package.json`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/package.json), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/package.json).
+- `docs/ds-health-check.md`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/docs/ds-health-check.md), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/docs/ds-health-check.md).
+- `docs/distribution.md`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/docs/distribution.md), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/docs/distribution.md).
+- `scripts/design/hook-check-rule.sh`: [snapshot](https://github.com/tsubotax/melta-ui/blob/88ff61bc52a6b6224c3837522a447c985e8b5ebb/scripts/design/hook-check-rule.sh), [raw retrieval](https://raw.githubusercontent.com/tsubotax/melta-ui/88ff61bc52a6b6224c3837522a447c985e8b5ebb/scripts/design/hook-check-rule.sh).
+
+**lumilinks-hq/atlas-design-system**
+
+- `docs/MCP.md`: [snapshot](https://github.com/lumilinks-hq/atlas-design-system/blob/a0e0c35288129e0354931195d8baa609b12250fd/docs/MCP.md), [raw retrieval](https://raw.githubusercontent.com/lumilinks-hq/atlas-design-system/a0e0c35288129e0354931195d8baa609b12250fd/docs/MCP.md).
+- `skills/atlas-design-system/SKILL.md`: [snapshot](https://github.com/lumilinks-hq/atlas-design-system/blob/a0e0c35288129e0354931195d8baa609b12250fd/skills/atlas-design-system/SKILL.md), [raw retrieval](https://raw.githubusercontent.com/lumilinks-hq/atlas-design-system/a0e0c35288129e0354931195d8baa609b12250fd/skills/atlas-design-system/SKILL.md).
+- `skills/ui-writing/SKILL.md`: [snapshot](https://github.com/lumilinks-hq/atlas-design-system/blob/a0e0c35288129e0354931195d8baa609b12250fd/skills/ui-writing/SKILL.md), [raw retrieval](https://raw.githubusercontent.com/lumilinks-hq/atlas-design-system/a0e0c35288129e0354931195d8baa609b12250fd/skills/ui-writing/SKILL.md).
+- `scripts/mcp/server.mjs`: [snapshot](https://github.com/lumilinks-hq/atlas-design-system/blob/a0e0c35288129e0354931195d8baa609b12250fd/scripts/mcp/server.mjs), [raw retrieval](https://raw.githubusercontent.com/lumilinks-hq/atlas-design-system/a0e0c35288129e0354931195d8baa609b12250fd/scripts/mcp/server.mjs).
+- `scripts/design-catalog.mjs`: [snapshot](https://github.com/lumilinks-hq/atlas-design-system/blob/a0e0c35288129e0354931195d8baa609b12250fd/scripts/design-catalog.mjs), [raw retrieval](https://raw.githubusercontent.com/lumilinks-hq/atlas-design-system/a0e0c35288129e0354931195d8baa609b12250fd/scripts/design-catalog.mjs).
+- `scripts/skill-catalog.mjs`: [snapshot](https://github.com/lumilinks-hq/atlas-design-system/blob/a0e0c35288129e0354931195d8baa609b12250fd/scripts/skill-catalog.mjs), [raw retrieval](https://raw.githubusercontent.com/lumilinks-hq/atlas-design-system/a0e0c35288129e0354931195d8baa609b12250fd/scripts/skill-catalog.mjs).
+- `scripts/mcp/server.test.mjs`: [snapshot](https://github.com/lumilinks-hq/atlas-design-system/blob/a0e0c35288129e0354931195d8baa609b12250fd/scripts/mcp/server.test.mjs), [raw retrieval](https://raw.githubusercontent.com/lumilinks-hq/atlas-design-system/a0e0c35288129e0354931195d8baa609b12250fd/scripts/mcp/server.test.mjs).
+- `scripts/docs-consistency.test.ts`: [snapshot](https://github.com/lumilinks-hq/atlas-design-system/blob/a0e0c35288129e0354931195d8baa609b12250fd/scripts/docs-consistency.test.ts), [raw retrieval](https://raw.githubusercontent.com/lumilinks-hq/atlas-design-system/a0e0c35288129e0354931195d8baa609b12250fd/scripts/docs-consistency.test.ts).
+- `scripts/rules-lint-bijection.test.mjs`: [snapshot](https://github.com/lumilinks-hq/atlas-design-system/blob/a0e0c35288129e0354931195d8baa609b12250fd/scripts/rules-lint-bijection.test.mjs), [raw retrieval](https://raw.githubusercontent.com/lumilinks-hq/atlas-design-system/a0e0c35288129e0354931195d8baa609b12250fd/scripts/rules-lint-bijection.test.mjs).
+- `docs/EXTENDING.md`: [snapshot](https://github.com/lumilinks-hq/atlas-design-system/blob/a0e0c35288129e0354931195d8baa609b12250fd/docs/EXTENDING.md), [raw retrieval](https://raw.githubusercontent.com/lumilinks-hq/atlas-design-system/a0e0c35288129e0354931195d8baa609b12250fd/docs/EXTENDING.md).
+
+#### Repository discovery and dependency metadata
+
+- Repository trees: [Melta main](https://api.github.com/repos/tsubotax/melta-ui/git/trees/main?recursive=1), [Atlas main](https://api.github.com/repos/lumilinks-hq/atlas-design-system/git/trees/main?recursive=1), [Atlas pinned tree](https://api.github.com/repos/lumilinks-hq/atlas-design-system/git/trees/a0e0c35288129e0354931195d8baa609b12250fd?recursive=1).
+- Skill directory navigation: [Melta Skills](https://github.com/tsubotax/melta-ui/tree/88ff61bc52a6b6224c3837522a447c985e8b5ebb/skills).
+- SDK release discovery: [server latest](https://registry.npmjs.org/@modelcontextprotocol/server/latest), [client latest](https://registry.npmjs.org/@modelcontextprotocol/client/latest).
+- Inspected SDK releases: [server 2.0.0 metadata](https://registry.npmjs.org/@modelcontextprotocol/server/2.0.0), [client 2.0.0 metadata](https://registry.npmjs.org/@modelcontextprotocol/client/2.0.0), [server tarball/type declarations](https://registry.npmjs.org/@modelcontextprotocol/server/-/server-2.0.0.tgz), [client tarball/type declarations](https://registry.npmjs.org/@modelcontextprotocol/client/-/client-2.0.0.tgz).
+- Other dependency metadata: [Zod](https://registry.npmjs.org/zod/latest), [initially evaluated HTML parser](https://registry.npmjs.org/node-html-parser/latest), [parse5](https://registry.npmjs.org/parse5/latest).
+- [parse5 project](https://github.com/inikulin/parse5): selected after a negative test found that the initially evaluated parser treated textarea markup as elements. The final example uses parse5 8.0.1 and retains raw-text/inert-template regression cases.
+
+Dependency lockfile registry/integrity URLs and protocol resource URIs are operational metadata, not external background-reading requirements. The skill prose and references remain source-neutral and self-contained.
+
+### Local implementation verification — 2026-09-23
+
+- Created a separate working directory with `scripts/copy-starter.mjs`, installed the lockfile with `npm ci --ignore-scripts`, and confirmed its template files and copied token generator matched the authored sources. An existing destination was rejected without overwrite.
+- On Node.js `v26.3.1`, `npm test` passed all four acceptance groups: HTML/context/authority checks; generated-view drift; real subprocess stdio MCP; reviewed learning into a new MCP run. The suite covers source-byte preservation, raw-text/inert-template parsing, scoped rules, changed proposal/evidence rejection, and generated-output symlink protection.
+- The original token-pipeline test passed after extracting its pure renderer for shared validation. All four Skill entrypoints passed `quick_validate.py`; JSON/YAML, local links/anchors, source-link separation, original-URL preservation, and whitespace checks passed.
+- An operator walkthrough followed the supplied Skills and `DESIGN.md`: resolve → check → propose → reject pending application → record an example-only accepted decision → apply → observe drift failure → regenerate → detect the previously unchecked defect → correct the actual HTML. Reports retain source and contract revisions. The example decision is not a product or stakeholder approval.
+- The copied profile page was opened in a real browser. Its generated theme rendered; changing the name and saving produced the local saved status; an empty name was blocked by native required-field validation. This is a targeted operator check, not a general browser/accessibility test suite.
+- Independent code review found two defects, both fixed and rechecked: acceptance now binds the reviewed proposal/evidence, and HTML parsing no longer treats textarea text as elements. No model-quality benchmark or upstream repository test run is claimed.
